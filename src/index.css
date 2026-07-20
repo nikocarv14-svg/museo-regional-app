@@ -1,0 +1,228 @@
+/* Tipografías elegantes desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
+:root {
+  /* Paleta Museo: Tonos tierra, crema, dorado e historia */
+  --museum-gold: #c59b27;
+  --museum-gold-hover: #a37f1e;
+  --museum-dark: #1a1615;
+  --museum-wood: #2c1d11;
+  --bg-warm: #fcfbf7;       /* Fondo crema papel de museo */
+  --card-bg: #ffffff;
+  --text-main: #2b2523;
+  --text-muted: #6e655f;
+  --border-color: #e8e2d5;
+  
+  --shadow-museum: 0 10px 25px -5px rgba(44, 29, 17, 0.08), 0 8px 10px -6px rgba(44, 29, 17, 0.04);
+  --radius-museum: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-warm);
+  color: var(--text-main);
+  line-height: 1.7;
+}
+
+/* Tipografía de títulos con serifa elegante */
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+  color: var(--museum-wood);
+  margin-top: 0;
+  letter-spacing: -0.02em;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Navbar con tono oscuro elegante */
+.navbar {
+  background-color: var(--museum-dark);
+  padding: 1.2rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 3px solid var(--museum-gold);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.navbar h2 {
+  margin: 0;
+  color: var(--museum-gold);
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.navbar div a {
+  color: #e5dfd5;
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.25s ease;
+}
+
+.navbar div a:hover {
+  background-color: rgba(197, 155, 39, 0.15);
+  color: var(--museum-gold);
+}
+
+/* Tarjetas simulando salas de exposición o marcos */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius-museum);
+  padding: 35px;
+  margin-bottom: 30px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-museum);
+  position: relative;
+}
+
+.card p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+/* Botones con tono dorado/bronce */
+.btn {
+  background-color: var(--museum-gold);
+  color: #ffffff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(197, 155, 39, 0.25);
+}
+
+.btn:hover {
+  background-color: var(--museum-gold-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(197, 155, 39, 0.35);
+}
+
+.btn-danger {
+  background-color: #991b1b;
+  box-shadow: 0 4px 10px rgba(153, 27, 27, 0.2);
+}
+
+.btn-danger:hover {
+  background-color: #7f1d1d;
+  box-shadow: 0 6px 14px rgba(153, 27, 27, 0.3);
+}
+
+/* Formularios estilizados */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--museum-wood);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-group input, 
+.form-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #faf8f5;
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+  outline: none;
+  border-color: var(--museum-gold);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(197, 155, 39, 0.15);
+}
+
+/* Listas estilizadas */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background-color: #faf8f5;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--museum-gold);
+  border-radius: 4px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li strong {
+  color: var(--museum-wood);
+  font-size: 1.05rem;
+}
+
+/* Grid para la cartelera */
+.api-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Estilo para el inicio centrado con toque histórico */
+.hero-museum {
+  text-align: center;
+  padding: 50px 30px;
+  background: radial-gradient(circle at center, #ffffff 0%, #f7f4ed 100%);
+  border: 1px solid var(--border-color);
+}
+
+.hero-museum h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: var(--museum-wood);
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  max-width: 650px;
+  margin: 0 auto 25px auto;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.divider {
+  width: 80px;
+  height: 3px;
+  background-color: var(--museum-gold);
+  margin: 20px auto 30px auto;
+}
