@@ -11,6 +11,8 @@ export default function Gestion() {
   });
 
   const [reservaConfirmada, setReservaConfirmada] = useState(null);
+  const [reservas, setReservas] = useState([]);
+  const [editandoId, setEditandoId] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,10 +30,58 @@ export default function Gestion() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const totalCalculado = calcularTotal();
+
+    if (editandoId !== null) {
+      // Editar registro existente
+      const actualizadas = reservas.map((res) => {
+        if (res.id === editandoId) {
+          return { ...visitante, id: editandoId, total: totalCalculado };
+        }
+        return res;
+      });
+      setReservas(actualizadas);
+      setEditandoId(null);
+    } else {
+      // Agregar nuevo registro
+      const nuevaReserva = {
+        ...visitante,
+        id: Date.now(),
+        total: totalCalculado,
+      };
+      setReservas([...reservas, nuevaReserva]);
+    }
+
     setReservaConfirmada({
       ...visitante,
-      total: calcularTotal(),
+      total: totalCalculado,
     });
+
+    // Limpiar formulario
+    setVisitante({
+      nombre: '',
+      email: '',
+      telefono: '',
+      fecha: '',
+      tipoEntrada: '3000',
+      cantidad: 1,
+    });
+  };
+
+  const handleEditar = (res) => {
+    setVisitante({
+      nombre: res.nombre,
+      email: res.email,
+      telefono: res.telefono,
+      fecha: res.fecha,
+      tipoEntrada: res.tipoEntrada,
+      cantidad: res.cantidad,
+    });
+    setEditandoId(res.id);
+  };
+
+  const handleEliminar = (id) => {
+    setReservas(reservas.filter((res) => res.id !== id));
   };
 
   return (
@@ -125,7 +175,7 @@ export default function Gestion() {
         <button
           type="submit"
           style={{
-            backgroundColor: '#3182ce',
+            backgroundColor: editandoId !== null ? '#2b6cb0' : '#3182ce',
             color: 'white',
             padding: '10px',
             border: 'none',
@@ -134,7 +184,7 @@ export default function Gestion() {
             fontWeight: 'bold',
           }}
         >
-          Registrar Visita
+          {editandoId !== null ? 'Guardar Cambios' : 'Registrar Visita'}
         </button>
       </form>
 
@@ -147,6 +197,49 @@ export default function Gestion() {
           <p><strong>Fecha de Visita:</strong> {reservaConfirmada.fecha}</p>
           <p><strong>Cantidad:</strong> {reservaConfirmada.cantidad}</p>
           <p><strong>Total Pagado:</strong> $ {reservaConfirmada.total.toLocaleString('es-CL')} CLP</p>
+        </div>
+      )}
+
+      {/* SECCIÓN DE LISTADO Y ACCIONES DE EDITAR / ELIMINAR */}
+      {reservas.length > 0 && (
+        <div style={{ marginTop: '30px' }}>
+          <h3>Registros Guardados</h3>
+          {reservas.map((res) => (
+            <div
+              key={res.id}
+              style={{
+                border: '1px solid #ccc',
+                padding: '12px',
+                borderRadius: '4px',
+                marginBottom: '10px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <div>
+                <strong>{res.nombre}</strong> - {res.fecha}
+                <br />
+                <small>{res.email} | Tel: {res.telefono}</small>
+                <br />
+                <small>Total: ${res.total.toLocaleString('es-CL')} CLP</small>
+              </div>
+              <div style={{ display: 'flex', gap: '5px' }}>
+                <button
+                  onClick={() => handleEditar(res)}
+                  style={{ backgroundColor: '#ecc94b', border: 'none', padding: '5px 10px', borderRadius: '3px', cursor: 'pointer' }}
+                >
+                  Editar
+                </button>
+                <button
+                  onClick={() => handleEliminar(res.id)}
+                  style={{ backgroundColor: '#e53e3e', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '3px', cursor: 'pointer' }}
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
