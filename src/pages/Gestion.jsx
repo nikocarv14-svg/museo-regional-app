@@ -5,6 +5,7 @@ export default function Gestion() {
     nombre: '',
     email: '',
     telefono: '',
+    fecha: '',
     tipoEntrada: 'General',
     precio: 3000,
     cantidad: 1
